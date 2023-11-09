@@ -1,58 +1,52 @@
-import io.qameta.allure.gradle.AllureExtension
-
 plugins {
     java
-    maven
-    id("io.qameta.allure") version "2.8.1"
 }
 
-group "io.qameta.allure.examples"
-version 1.3
+tasks.withType(Wrapper::class) {
+    gradleVersion = "8.4"
+}
 
-val allureVersion = "2.13.6"
-val testngVersion = "6.14.3"
+group = "com.example.testng"
+version = "1.0-SNAPSHOT"
+
+val allureVersion = "2.24.0"
+val aspectJVersion = "1.9.20.1"
+val kotlinVersion = "1.9.20"
+
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(21))
+    }
+}
 
 tasks.withType(JavaCompile::class) {
-    sourceCompatibility = "${JavaVersion.VERSION_1_8}"
-    targetCompatibility = "${JavaVersion.VERSION_1_8}"
+    options.encoding = "UTF-8"
+    options.compilerArgs.add("-parameters")
 }
 
-tasks {
-    compileJava {
-        options.encoding = "UTF-8"
-    }
-    compileTestJava {
-        options.encoding = "UTF-8"
-    }
+val agent: Configuration by configurations.creating {
+    isCanBeConsumed = true
+    isCanBeResolved = true
 }
 
-configure<AllureExtension> {
-    autoconfigure = true
-    aspectjweaver = true
-    version = allureVersion
-
-    clean = true
-
-    useTestNG {
-        version = allureVersion
-    }
+tasks.test {
+    useTestNG()
+    jvmArgs = listOf(
+        "-javaagent:${agent.singleFile}"
+    )
 }
 
-tasks.withType(Test::class) {
-    ignoreFailures = true
-    useTestNG {
+dependencies {
+    agent("org.aspectj:aspectjweaver:$aspectJVersion")
+    
+    testImplementation("org.testng:testng:7.8.0")
+    
+    testImplementation(platform("io.qameta.allure:allure-bom:$allureVersion"))
+    testImplementation("io.qameta.allure:allure-testng")
 
-    }
+    testImplementation("org.slf4j:slf4j-simple:2.0.9")
 }
 
 repositories {
     mavenCentral()
-    mavenLocal()
-}
-
-dependencies {
-    testImplementation("io.qameta.allure:allure-java-commons:$allureVersion")
-
-    testImplementation("org.testng:testng:$testngVersion")
-    testImplementation("org.slf4j:slf4j-simple:1.7.30")
 }
