@@ -11,7 +11,7 @@ version = "1.0-SNAPSHOT"
 
 val allureVersion = "2.25.0"
 val aspectJVersion = "1.9.21"
-val kotlinVersion = "1.9.21"
+val kotlinVersion = "1.9.22"
 
 java {
     toolchain {
