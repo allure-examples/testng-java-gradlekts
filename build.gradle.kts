@@ -3,7 +3,7 @@ plugins {
 }
 
 tasks.withType(Wrapper::class) {
-    gradleVersion = "8.5"
+    gradleVersion = "8.6"
 }
 
 group = "com.example.testng"
@@ -39,12 +39,12 @@ tasks.test {
 dependencies {
     agent("org.aspectj:aspectjweaver:$aspectJVersion")
     
-    testImplementation("org.testng:testng:7.8.0")
+    testImplementation("org.testng:testng:7.9.0")
     
     testImplementation(platform("io.qameta.allure:allure-bom:$allureVersion"))
     testImplementation("io.qameta.allure:allure-testng")
 
-    testImplementation("org.slf4j:slf4j-simple:2.0.9")
+    testImplementation("org.slf4j:slf4j-simple:2.0.12")
 }
 
 repositories {
