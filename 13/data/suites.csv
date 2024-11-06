@@ -1,0 +1,3 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"","7","lambdaStepTest","Gradle suite","Wed Nov 06 16:54:22 GMT 2024","passed","Wed Nov 06 16:54:22 GMT 2024","com.example.testng.StepTest","Gradle test","com.example.testng.StepTest","lambdaStepTest"
+"","27","annotatedStepTest","Gradle suite","Wed Nov 06 16:54:22 GMT 2024","passed","Wed Nov 06 16:54:22 GMT 2024","com.example.testng.StepTest","Gradle test","com.example.testng.StepTest","annotatedStepTest"
